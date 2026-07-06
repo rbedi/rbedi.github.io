@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- ===== EDIT PER POST: title / description / date ===== -->
+    <title>On writing a first post — Rishi Bedi</title>
+    <meta name="description" content="A short example post that demonstrates the formatting available." />
+
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="On writing a first post" />
+    <meta property="og:description" content="A short example post that demonstrates the formatting available." />
+    <meta property="article:published_time" content="2026-07-06" />
+
+    <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20100%20100'%3E%3Ccircle%20cx='50'%20cy='50'%20r='44'%20fill='%23b5442d'/%3E%3C/svg%3E" />
+    <!-- two levels up to the shared stylesheet -->
+    <link rel="stylesheet" href="../../styles.css" />
+  </head>
+  <body>
+    <div class="wrap">
+      <a class="back-home" href="../../">&larr; Rishi Bedi</a>
+
+      <article>
+        <header class="post-header">
+          <h1 class="post-title-main">On writing a first post</h1>
+          <div class="post-meta">July 6, 2026</div>
+          <!-- Optional italic subtitle:
+          <p class="post-subtitle">An optional one-line subtitle.</p>
+          -->
+        </header>
+
+        <!-- ===================== BODY =====================
+             This section is the rendered Markdown. When Rishi
+             hands over a new .md file, the content below is what
+             gets regenerated; everything else in this file stays.
+        -->
+        <div class="prose">
+          <p>
+            This is an example post. It exists to show what the
+            formatting looks like &mdash; paragraphs, headings, links,
+            lists, images, quotes, and endnotes.<sup class="fn"
+              ><a id="fnref-1" href="#fn-1">1</a></sup
+            >
+          </p>
+
+          <p>
+            Body text is set in a serif for comfortable reading, with a
+            generous line height and a narrow measure so lines never get
+            too long. You can <strong>bold</strong> things, add
+            <em>emphasis</em>, <mark>highlight</mark> a phrase, drop in
+            <code>inline code</code>, or
+            <a href="https://example.com">link out</a> to a source.
+          </p>
+
+          <h2>A section heading</h2>
+
+          <p>
+            Sections break up longer pieces. Headings use the same serif
+            as the body to keep everything feeling like one document.
+          </p>
+
+          <blockquote>
+            <p>
+              A block quote for pulling out a passage or citing someone
+              at length. It sits slightly muted and indented from the
+              main column.
+            </p>
+          </blockquote>
+
+          <h3>A smaller subheading</h3>
+
+          <p>Lists work the way you'd expect:</p>
+
+          <ul>
+            <li>An unordered item.</li>
+            <li>Another one, with a <a href="https://example.com">link</a>.</li>
+            <li>A third for good measure.</li>
+          </ul>
+
+          <ol>
+            <li>Ordered items,</li>
+            <li>when sequence matters.</li>
+          </ol>
+
+          <h2>Images</h2>
+
+          <p>
+            Inline images are supported. Drop the image file into this
+            post's folder and reference it by name. Wrap it in a
+            <code>&lt;figure&gt;</code> to add a caption:
+          </p>
+
+          <figure>
+            <!-- Replace with a real image placed in this folder, e.g. diagram.png -->
+            <img
+              src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20800%20400'%3E%3Crect%20width='800'%20height='400'%20fill='%23e8e5dd'/%3E%3Ctext%20x='400'%20y='205'%20font-family='sans-serif'%20font-size='26'%20fill='%238f8f87'%20text-anchor='middle'%3Eyour-image.png%3C/text%3E%3C/svg%3E"
+              alt="Placeholder image"
+            />
+            <figcaption>
+              A caption sits beneath the image, in a smaller sans-serif.<sup
+                class="fn"
+                ><a id="fnref-2" href="#fn-2">2</a></sup
+              >
+            </figcaption>
+          </figure>
+
+          <h2>Code</h2>
+
+          <p>Fenced code blocks are preserved verbatim:</p>
+
+          <pre><code>def greet(name):
+    return f"Hello, {name}"</code></pre>
+
+          <p>
+            That covers the essentials. The endnotes below show how
+            footnotes render &mdash; click a number to jump down, and the
+            arrow to jump back.
+          </p>
+
+          <!-- ===================== ENDNOTES =====================
+               One <li> per note, in order. Each ends with a
+               back-link (↩) whose href points at its reference.
+          -->
+          <section class="footnotes">
+            <h2>Notes</h2>
+            <ol>
+              <li id="fn-1">
+                Endnotes are numbered and link back to where they were
+                cited. Use them for asides, sources, or caveats.
+                <a class="fn-back" href="#fnref-1" aria-label="Back to text">&#8617;</a>
+              </li>
+              <li id="fn-2">
+                A second note, to show the back-and-forth navigation.
+                <a class="fn-back" href="#fnref-2" aria-label="Back to text">&#8617;</a>
+              </li>
+            </ol>
+          </section>
+        </div>
+      </article>
+
+      <footer class="site-footer">
+        <a href="../../">&larr; Back to all posts</a>
+      </footer>
+    </div>
+
+    <script src="../../toc.js" defer></script>
+  </body>
+</html>

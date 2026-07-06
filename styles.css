@@ -1,0 +1,582 @@
+/* =============================================================
+   Rishi Bedi — personal blog
+   A single stylesheet shared by the homepage and every post.
+   Editorial, minimal, fast. No web fonts, no external deps.
+   Tweak the design tokens in :root to reskin the whole site.
+   ============================================================= */
+
+:root {
+  /* Type */
+  --font-serif: Charter, "Bitstream Charter", "Sitka Text", "Iowan Old Style",
+    Cambria, Georgia, "Times New Roman", serif;
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
+    Arial, sans-serif;
+  --font-mono: ui-monospace, "SF Mono", "SFMono-Regular", Menlo, Consolas,
+    "Liberation Mono", monospace;
+
+  /* Reading measure (post + list column width) */
+  --measure: 40rem;
+
+  /* Light theme */
+  --bg: #fdfcf9;
+  --text: #232320;
+  --muted: #8f8f87;
+  --border: #e8e5dd;
+  --accent: #b5442d;
+  --code-bg: #f3f1ea;
+  --mark: #fbf1c7;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #16161a;
+    --text: #e6e4de;
+    --muted: #8b8b83;
+    --border: #2a2a2f;
+    --accent: #e0785f;
+    --code-bg: #22222a;
+    --mark: #4a431f;
+  }
+}
+
+/* ---------- Base ---------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-serif);
+  font-size: 1.1875rem; /* ~19px */
+  line-height: 1.65;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-kerning: normal;
+}
+
+.wrap {
+  max-width: var(--measure);
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+/* ---------- Links ---------- */
+a {
+  color: inherit;
+  text-decoration-color: var(--border);
+  text-underline-offset: 0.15em;
+  transition: color 0.15s ease, text-decoration-color 0.15s ease;
+}
+a:hover {
+  color: var(--accent);
+  text-decoration-color: currentColor;
+}
+
+/* ---------- Site header (shared) ---------- */
+.site-header {
+  padding-top: 5.5rem;
+  padding-bottom: 1rem;
+}
+.site-name {
+  font-family: var(--font-sans);
+  font-size: 1.15rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  margin: 0;
+}
+.site-name a {
+  text-decoration: none;
+}
+.site-bio {
+  color: var(--muted);
+  margin: 0.5rem 0 0;
+  font-size: 1.0625rem;
+  line-height: 1.5;
+}
+.site-bio a {
+  text-decoration-color: var(--muted);
+}
+
+/* Small nav row (optional links) */
+.site-nav {
+  font-family: var(--font-sans);
+  font-size: 0.9375rem;
+  color: var(--muted);
+  margin-top: 0.75rem;
+  display: flex;
+  gap: 1.1rem;
+  flex-wrap: wrap;
+}
+.site-nav a {
+  text-decoration: none;
+}
+
+/* ---------- Homepage: post list ---------- */
+.post-list {
+  list-style: none;
+  margin: 2.5rem 0 0;
+  padding: 0;
+}
+.post-list li {
+  border-top: 1px solid var(--border);
+}
+.post-list li:last-child {
+  border-bottom: 1px solid var(--border);
+}
+.post-link {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1.25rem;
+  padding: 1.05rem 0;
+  text-decoration: none;
+}
+.post-link .post-title {
+  font-size: 1.1875rem;
+  line-height: 1.35;
+}
+.post-link .post-date {
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  color: var(--muted);
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+  flex-shrink: 0;
+}
+.post-link:hover .post-title {
+  color: var(--accent);
+  text-decoration: underline;
+  text-decoration-color: currentColor;
+  text-underline-offset: 0.15em;
+}
+
+/* Optional one-line description under a title */
+.post-desc {
+  color: var(--muted);
+  font-size: 1rem;
+  margin: 0.15rem 0 0;
+}
+
+/* Optional year grouping heading */
+.year-heading {
+  font-family: var(--font-sans);
+  font-size: 0.8125rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 2.25rem 0 0.5rem;
+}
+
+/* ---------- Post page ---------- */
+.post-header {
+  padding-top: 3.5rem;
+  margin-bottom: 2.25rem;
+}
+.back-home {
+  font-family: var(--font-sans);
+  font-size: 0.9375rem;
+  color: var(--muted);
+  text-decoration: none;
+  display: inline-block;
+  margin-bottom: 2.5rem;
+}
+.back-home:hover {
+  color: var(--accent);
+}
+.post-title-main {
+  font-size: 2.1rem;
+  line-height: 1.15;
+  letter-spacing: -0.015em;
+  margin: 0 0 0.6rem;
+  font-weight: 600;
+}
+.post-meta {
+  font-family: var(--font-sans);
+  font-size: 0.9375rem;
+  color: var(--muted);
+}
+.post-subtitle {
+  color: var(--muted);
+  font-size: 1.2rem;
+  font-style: italic;
+  line-height: 1.4;
+  margin: 0.25rem 0 0;
+}
+
+/* ---------- Prose ---------- */
+.prose {
+  padding-bottom: 5rem;
+}
+.prose p {
+  margin: 1.35rem 0;
+}
+.prose h2 {
+  font-size: 1.5rem;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  margin: 2.75rem 0 0.75rem;
+  font-weight: 600;
+}
+.prose h3 {
+  font-size: 1.2rem;
+  line-height: 1.3;
+  margin: 2rem 0 0.5rem;
+  font-weight: 600;
+}
+.prose a {
+  text-decoration: underline;
+  text-decoration-color: color-mix(in srgb, var(--accent) 40%, transparent);
+}
+.prose a:hover {
+  text-decoration-color: var(--accent);
+}
+
+.prose ul,
+.prose ol {
+  margin: 1.35rem 0;
+  padding-left: 1.4rem;
+}
+.prose li {
+  margin: 0.4rem 0;
+}
+.prose li::marker {
+  color: var(--muted);
+}
+
+.prose blockquote {
+  margin: 1.6rem 0;
+  padding: 0.1rem 0 0.1rem 1.25rem;
+  border-left: 3px solid var(--border);
+  color: var(--muted);
+  font-style: italic;
+}
+.prose blockquote p {
+  margin: 0.5rem 0;
+}
+
+.prose hr {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 3rem 0;
+}
+
+/* Inline emphasis */
+.prose strong {
+  font-weight: 600;
+}
+.prose mark {
+  background: var(--mark);
+  color: inherit;
+  padding: 0 0.15em;
+}
+
+/* Code */
+.prose code {
+  font-family: var(--font-mono);
+  font-size: 0.85em;
+  background: var(--code-bg);
+  padding: 0.15em 0.35em;
+  border-radius: 4px;
+}
+.prose pre {
+  background: var(--code-bg);
+  padding: 1rem 1.15rem;
+  border-radius: 8px;
+  overflow-x: auto;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  margin: 1.6rem 0;
+}
+.prose pre code {
+  background: none;
+  padding: 0;
+  font-size: inherit;
+}
+
+/* Images / figures */
+.prose figure {
+  margin: 2rem 0;
+}
+.prose img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  border-radius: 6px;
+}
+.prose figcaption {
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  color: var(--muted);
+  text-align: center;
+  line-height: 1.4;
+  margin-top: 0.65rem;
+}
+/* Inline image (no caption) that should sit inside a paragraph flow */
+.prose p > img {
+  margin: 0.5rem 0;
+}
+
+/* Diagram figures: a light card so transparent / technical diagrams with
+   dark ink stay legible in BOTH light and dark mode. Add class="diagram". */
+.prose figure.diagram {
+  background: #ffffff;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1.1rem;
+}
+.prose figure.diagram img {
+  border-radius: 2px;
+}
+
+/* Wide figures break out past the reading column for detailed diagrams.
+   Add class="wide" (often together with "diagram"). */
+.prose figure.wide {
+  width: min(92vw, 58rem);
+  margin-left: 50%;
+  transform: translateX(-50%);
+  /* A wide figure reaches into the left gutter where the fixed table of
+     contents lives. Paint the (opaque) figure above it so the diagram card
+     cleanly covers the TOC as it scrolls past, rather than the TOC text
+     bleeding onto the diagram. */
+  position: relative;
+  z-index: 1;
+}
+.prose figure.wide figcaption {
+  max-width: 40rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+@media (max-width: 640px) {
+  .prose figure.wide {
+    width: 100%;
+    margin-left: 0;
+    transform: none;
+  }
+}
+
+/* Tables */
+.prose table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+  margin: 1.6rem 0;
+}
+.prose th,
+.prose td {
+  text-align: left;
+  padding: 0.5rem 0.65rem;
+  border-bottom: 1px solid var(--border);
+}
+.prose th {
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  letter-spacing: 0.02em;
+}
+
+/* ---------- Footnotes / endnotes ---------- */
+sup.fn {
+  font-size: 0.72em;
+  line-height: 0;
+  vertical-align: super;
+}
+sup.fn a {
+  text-decoration: none;
+  padding: 0 0.1em;
+  font-family: var(--font-sans);
+  font-weight: 600;
+  color: var(--accent);
+}
+sup.fn a:hover {
+  text-decoration: underline;
+}
+
+.footnotes {
+  margin-top: 3.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border);
+  font-size: 0.95rem;
+  line-height: 1.55;
+  color: var(--text);
+}
+.footnotes h2 {
+  font-family: var(--font-sans);
+  font-size: 0.8125rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-weight: 600;
+  margin: 0 0 1rem;
+}
+.footnotes ol {
+  padding-left: 1.25rem;
+  margin: 0;
+}
+.footnotes li {
+  margin: 0.65rem 0;
+  padding-left: 0.2rem;
+}
+.footnotes li::marker {
+  color: var(--muted);
+}
+/* smooth landing when jumping to a note or back */
+.footnotes li,
+sup.fn {
+  scroll-margin-top: 2rem;
+}
+/* briefly highlight the targeted note */
+.footnotes li:target {
+  background: color-mix(in srgb, var(--mark) 60%, transparent);
+  border-radius: 4px;
+}
+.footnotes .fn-back {
+  text-decoration: none;
+  margin-left: 0.35rem;
+  color: var(--muted);
+  font-family: var(--font-sans);
+}
+.footnotes .fn-back:hover {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+/* ---------- Post table of contents ----------
+   Auto-generated by toc.js from the article's headings. It floats in the
+   empty left gutter and only appears when the window is wide enough to hold
+   it there without crowding the centered reading column. */
+.prose h2,
+.prose h3 {
+  scroll-margin-top: 1.75rem;
+}
+
+.post-toc {
+  display: none;
+}
+
+@media (min-width: 1280px) {
+  .post-toc {
+    display: block;
+    position: fixed;
+    top: 7rem;
+    width: 12rem;
+    /* sit just left of the centered column (half of --measure = 23rem) */
+    left: calc(50% - 23rem - 2rem - 12rem);
+    max-height: calc(100vh - 9rem);
+    overflow-y: auto;
+    font-family: var(--font-sans);
+  }
+}
+
+.post-toc-title {
+  font-size: 0.6875rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--muted);
+  margin-bottom: 0.7rem;
+  padding-left: 0.85rem;
+}
+.post-toc ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.post-toc a {
+  display: block;
+  padding: 0.3rem 0 0.3rem 0.85rem;
+  border-left: 2px solid var(--border);
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 0.8125rem;
+  line-height: 1.35;
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+.post-toc a:hover {
+  color: var(--text);
+  border-left-color: var(--muted);
+}
+.post-toc li.toc-h3 a {
+  padding-left: 1.7rem;
+  font-size: 0.78rem;
+}
+.post-toc li.active > a {
+  color: var(--accent);
+  border-left-color: var(--accent);
+}
+
+/* ---------- Footer ---------- */
+.site-footer {
+  border-top: 1px solid var(--border);
+  margin-top: 4rem;
+  padding: 2rem 0 4rem;
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  color: var(--muted);
+}
+.site-footer a {
+  text-decoration: none;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 640px) {
+  body {
+    font-size: 1.0625rem;
+    line-height: 1.6;
+  }
+  .wrap {
+    padding: 0 1.25rem;
+  }
+  .site-header {
+    padding-top: 3.5rem;
+  }
+  .post-title-main {
+    font-size: 1.7rem;
+  }
+  .post-header {
+    padding-top: 2rem;
+  }
+  .back-home {
+    margin-bottom: 1.75rem;
+  }
+  .post-link {
+    flex-direction: column;
+    gap: 0.2rem;
+    padding: 0.9rem 0;
+  }
+  .post-link .post-date {
+    font-size: 0.8125rem;
+  }
+}
+
+/* Wider reading column + slightly smaller type on roomy desktop viewports.
+   Narrow windows (tablet / mobile) keep the tighter measure above. */
+@media (min-width: 1024px) {
+  :root {
+    --measure: 46rem;
+  }
+  body {
+    font-size: 1.125rem; /* ~18px */
+  }
+  .post-title-main {
+    font-size: 2.35rem;
+  }
+}
+
+/* Respect reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  a {
+    transition: none;
+  }
+}

@@ -1,0 +1,585 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>How AI can actually move the needle for drug discovery — Rishi Bedi</title>
+    <meta
+      name="description"
+      content="Most drugs fail not because we can't build the molecule, but because we specified the wrong biology. What that means for AI in drug discovery."
+    />
+
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="How AI can actually move the needle for drug discovery" />
+    <meta
+      property="og:description"
+      content="Most drugs fail not because we can't build the molecule, but because we specified the wrong biology. What that means for AI in drug discovery."
+    />
+    <meta property="article:published_time" content="2026-07-06" />
+
+    <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20100%20100'%3E%3Ccircle%20cx='50'%20cy='50'%20r='44'%20fill='%23b5442d'/%3E%3C/svg%3E" />
+    <link rel="stylesheet" href="../../styles.css" />
+  </head>
+  <body>
+    <div class="wrap">
+      <a class="back-home" href="../../">&larr; Rishi Bedi</a>
+
+      <article>
+        <header class="post-header">
+          <h1 class="post-title-main">How AI can actually move the needle for drug discovery</h1>
+          <div class="post-meta">July 6, 2026</div>
+        </header>
+
+        <div class="prose">
+          <h2 data-toc="An overloaded term">&lsquo;Drug discovery&rsquo; is an overloaded term</h2>
+
+          <p>Drugs rarely fail because they can&rsquo;t do what they were designed to do.</p>
+
+          <p>
+            We &mdash; collectively, as a field &mdash; have become remarkably good at
+            building molecules that exert a particular function. We can do it even
+            against targets once written off as undruggable (see:
+            <a href="https://www.nejm.org/doi/full/10.1056/NEJMoa2605555">pan-KRAS inhibitors</a>),
+            and increasingly we can build molecules that exert a set of coordinated
+            functions at once (see:
+            <a href="https://www.nature.com/articles/d41573-026-00106-5">the proliferation of bi-, tri-, and multispecifics</a>).
+            The engineering of &ldquo;make a thing that does <strong>X</strong>&rdquo; is no
+            longer the rate limiting step.
+          </p>
+
+          <p>
+            And yet most drugs still fail. They fail in the clinic, late and
+            expensively, after the molecule has been shown to do exactly what it was
+            built to do. They fail because <strong>X</strong> was the wrong thing to ask
+            for &mdash; because the function the drug was designed for turned out not to
+            treat the disease.
+          </p>
+
+          <p>
+            In other words: the drug did the thing, but the thing was wrong. There are
+            multiple ways for &ldquo;the thing&rdquo; to be wrong. For example: it may be
+            an effect rather than a cause, it may be right in one cell type and wrong in
+            another, or it may be right in a preclinical model but irrelevant to the human
+            biology.
+          </p>
+
+          <p>
+            This means the dominant failure mode in biotech is not an engineering
+            failure. It is a specification failure: specifically, a failure to correctly
+            specify what biology, if moved in the right direction, would alter disease
+            pathology.
+          </p>
+
+          <p>
+            A corollary of this analysis is that &ldquo;drug discovery&rdquo;, and
+            <em>especially</em> &ldquo;AI for drug discovery&rdquo; is an overloaded term
+            that obscures where attention is most needed. It bundles together two very
+            different activities:
+          </p>
+
+          <ol>
+            <li>figuring out what the drug should do, and for which patients</li>
+            <li>building a molecule (or molecules) that can do it</li>
+          </ol>
+
+          <p>
+            We have made <em>tremendous</em> progress on #2, using a beautiful explosion
+            of experimental and (recently, increasingly) computational
+            techniques.<sup class="fn"><a id="fnref-1" href="#fn-1">1</a></sup> But
+            attrition in clinical success is dominated by #1.
+          </p>
+
+          <p>
+            This is the next great frontier for AI in biology: not merely accelerating the
+            construction of drugs, but learning what biology we should be trying to
+            change. AI will be transformative for this challenge, but only if it can learn
+            from causal experiments in models that preserve the disease biology we need to
+            understand. To see why, we have to start with the central problem: why is
+            specifying the right biological objective so hard?
+          </p>
+
+          <h2 data-toc="Why specification is hard">Why is specifying the objective so difficult?</h2>
+
+          <h3 data-toc="1/ Complex disease &rarr; single target">Reason #1: excess faith in the &lsquo;needle-in-the-haystack&rsquo; view of target selection</h3>
+
+          <p>
+            Clinical translation has a compression problem: increasingly sophisticated
+            models of disease complexity still tend to be reduced to single-target
+            development programs.
+          </p>
+
+          <p>
+            Upstream, disease biology is increasingly described in high dimensions:
+            multi-omic atlases, spatial context, interacting cell states, compensatory
+            loops, temporal dynamics. Downstream, however, a therapeutic program gets
+            reduced to a much simpler object via the following implicit syllogism:
+          </p>
+
+          <ul>
+            <li>disease <em>d</em> is modeled as dysfunction of cell type <em>c</em></li>
+            <li>the activity of target <em>t</em> is what makes cell type <em>c</em> dysfunctional</li>
+            <li>therefore, modulating <em>t</em> will rescue the phenotype of <em>c</em>, and ameliorate the effects of <em>d</em></li>
+          </ul>
+
+          <p>
+            This framing has been handsomely, albeit infrequently, rewarded. The allure of
+            discovering the next Keytruda (anti-PD1 monospecific) or Dupixent (anti-IL4R
+            monospecific) is
+            overwhelming.<sup class="fn"><a id="fnref-2" href="#fn-2">2</a></sup>
+          </p>
+
+          <p>
+            But the target is a convenient translational unit, not necessarily the
+            biological unit of disease.
+          </p>
+
+          <p>
+            In many diseases, the relevant object is not a singular faulty component, but a
+            system in a bad state.
+          </p>
+
+          <p>
+            Cancer is tumor cells embedded in a specific tissue context, surrounded by
+            immune cells, stromal cells, cytokines, metabolites, extracellular matrix, and
+            vasculature.
+          </p>
+
+          <p>
+            Similarly, autoimmune diseases are dysregulated immune states that involve
+            multiple cell types, compensatory pathways, the microbiome, and time.
+          </p>
+
+          <p>
+            In both cases, the disease pathology is mediated by the interaction of multiple
+            cell types: the disease is an emergent phenomenon. It&rsquo;s unsurprising then
+            that many effective interventions may need to be multi-target, sequential, or
+            context-specific. It is unlikely that the entire pathological disease state
+            hinges on a singular node that just has to be plucked out of the proteome and
+            activated or inhibited.
+          </p>
+
+          <h3 data-toc="2/ Bias towards additive effects">Reason #2: combination development is biased toward seeking additive effects</h3>
+
+          <p>
+            The natural response to reason #1 is: fine, then use combination therapies. But
+            the way we develop combinations often preserves the same reductionist error.
+          </p>
+
+          <p>
+            Combination therapies are old news. Backbone chemo regimens are often
+            combinations of multiple agents. Basically the whole field of immuno-oncology
+            since 2014 has been engaged in an exercise of &ldquo;combine anti-PD1 with
+            what?&rdquo; And the impending patent cliffs of highly profitable I&amp;I drugs
+            have set off a quest to identify bispecifics to replace them.
+          </p>
+
+          <p>
+            But the development of such combinations is biased toward additive logic. Show
+            that X has single-agent activity, show that Y has single-agent activity, and
+            combine them into a regimen of X+Y &mdash; or if you need new chemical matter,
+            combine them into a bispecific of XY.
+          </p>
+
+          <p>
+            The underlying assumption is that the right combination should be decomposable
+            into independently useful parts. The contrapositive of this idea is that if a
+            given target fails to manifest single-agent activity (or activity when combined
+            with anti-PD1, the de facto I/O backbone), it is treated as unimportant, or at
+            least clinically undevelopable.
+          </p>
+
+          <p>This is clinically convenient, but often biologically wrong.</p>
+
+          <p>
+            We need to take more seriously the idea &mdash; well-trodden in the preclinical
+            literature and deep mechanistic dives of virtually any biological system
+            &mdash; that non-linear, non-additive phenotypes are commonplace and intimately
+            tied to fundamental disease pathology.
+          </p>
+
+          <p>
+            Non-linear phenotypes are hard to develop against because the relevant unit of
+            biology is no longer the individual target. It is the interaction among
+            dysregulated cellular phenotypes: the feedback loops, compensatory programs,
+            timing effects, and higher-order dependencies that determine how the system
+            evolves after perturbation.
+          </p>
+
+          <p>
+            This is especially true in multicellular disease states. Correcting an emergent
+            phenotype may require pushing on several parts of the system at once, even if
+            none of those components look compelling in isolation. The therapeutic effect
+            may live in the higher-order interaction, which is exactly where the current
+            development funnel is least systematic.
+          </p>
+
+          <h3 data-toc="3/ Defining a &lsquo;disease&rsquo;">Reason #3: the intervention may be right for a particular state, but not for the entire disease</h3>
+
+          <p>
+            Even if the biological objective is correctly specified, the clinical test can
+            still fail if the patient population is specified incorrectly. It is not enough
+            to ask how to shift a given biological state; we also have to ask which patients
+            are actually in that starting state.
+          </p>
+
+          <p>
+            Disease categories are typically defined by a combination of anatomy and
+            symptoms, while interventions act on biological states. This mismatch matters
+            because a category like &ldquo;lung cancer,&rdquo; &ldquo;colorectal
+            cancer,&rdquo; &ldquo;rheumatoid arthritis,&rdquo; or &ldquo;IBD&rdquo; may
+            contain multiple underlying disease states, only some of which are relevant to
+            a particular intervention.
+          </p>
+
+          <p>
+            So the ontological question becomes practically important: what cluster of
+            dysregulated multicellular phenotypes do we lump together as a disease?
+          </p>
+
+          <p>
+            The current status quo defaults to an intervention scientifically designed to
+            solve a specific dysregulated phenotype being applied to <em>all patients</em>
+            whose disease falls within a category defined by gross anatomical location and
+            fuzzy symptom grouping. The disease definition may include a variety of distinct
+            biological states, only a subset of which map to the specific phenotype the
+            intervention was designed to address.
+          </p>
+
+          <p>
+            This means a clinical trial can &ldquo;fail&rdquo; for reasons that are not
+            cleanly interpretable. The intervention may have been wrong; or the intervention
+            may have been right for a state that was present in only a minority of enrolled
+            patients. In the latter case, the failure may actually be a disease-ontology
+            failure.
+          </p>
+
+          <p>
+            Therefore, a more translationally useful categorization for both discovery and
+            development may be necessary. We need ontologies that reflect the multicellular
+            state at a biological level, in addition to or instead of purely
+            anatomical/clinical definitions.
+          </p>
+
+          <p>
+            Oncology has already accepted this for targeted therapies: HER2, EGFR, ALK,
+            BRAF, dMMR/MSI-H all show that specific tumor cell features can be more
+            informative than tumor type for treatment selection. Consider gefitinib, which
+            was initially developed for advanced non-small cell lung cancer (NSCLC) broadly,
+            but failed to show convincing benefit. When later trials were limited to
+            patients who had specific EGFR mutations (exon 19 deletions or L858R), it was a
+            striking success. In retrospect, the original trials had not cleanly tested
+            whether EGFR inhibition worked; they had tested whether EGFR inhibition worked
+            when diluted across a broad anatomical category in which only a minority of
+            patients had gefitinib-sensitive EGFR biology.
+          </p>
+
+          <p>The next step is applying analogous logic to multicellular disease states.</p>
+
+          <hr />
+
+          <p>
+            These reasons help explain why drug development seems like it is getting harder
+            over time. Many of the clearest single-axis opportunities in diseases with
+            relatively simple causal structure have already been found. What remains is
+            increasingly enriched for diseases where the relevant biology is multicellular,
+            context-dependent, nonlinear, or poorly captured by existing disease categories.
+            In other words, the remaining frontier is disproportionately made up of
+            precisely the diseases where biological specification is hardest.
+          </p>
+
+          <p>
+            In all three cases, the failure is not that biology is unknowable. It is that we
+            keep forcing disease into units that are easier to develop against: one target,
+            one additive combination, one anatomical indication. The specification problem
+            is the problem of choosing units of intervention and units of patient selection
+            that match the actual structure of disease.
+          </p>
+
+          <h2 data-toc="What AI needs to learn">If the bottleneck is biological specification, what does an AI-for-drug-discovery system need to learn?</h2>
+
+          <p>
+            So what would let us specify biological objectives better; in the sense of
+            yielding a higher clinical success rate?
+          </p>
+
+          <p>
+            The previous section points to three missing pieces of knowledge. We need to
+            know what biological state actually drives the disease phenotype; what
+            intervention can move that state; and which patients are actually in the state
+            the intervention is meant to correct.
+          </p>
+
+          <p>
+            These are prediction questions about the system. Given a starting state and a
+            perturbation, what future state should we expect (e.g., move toward resolution /
+            compensate back to the disease attractor state / or shift into a different
+            pathological state)?
+          </p>
+
+          <p>
+            Learning a map over high-dimensional biological state space is a natural use
+            case for AI. The useful object is a computational model of
+            (state, intervention)&nbsp;&rarr;&nbsp;state&prime;. If that mapping can be
+            learned, the specification problem starts to look like a control problem: choose
+            interventions that predictably navigate a diseased system from its current state
+            toward a desired future state.
+          </p>
+
+          <p>How can such a mapping be learned?</p>
+
+          <h3 data-toc="1/ It&rsquo;s all in the literature">Approach #1. LLMs reign supreme: the necessary data is latent in the literature.</h3>
+
+          <p>Consider the world where reasoning alone is the bottleneck to identifying cures.</p>
+
+          <p>
+            In this world, the missing map already exists, just not in a usable form.
+            Decades of biology have produced an enormous, distributed record of perturbation
+            and response: knockouts, overexpression studies, cytokine stimulations, drug
+            treatments, mouse models, in vitro assays, clinical observations, failed trials.
+            LLM reasoning ability, particularly for information synthesis, is already
+            superhuman. It follows that what we need to do is simply turn LLMs onto the right
+            problems and dutifully execute their clinical vision.
+          </p>
+
+          <p>
+            The bet is that a latent transition model can be extracted from the data we
+            already have: read the literature, reconcile contradictions, connect mechanisms,
+            and infer which perturbations should move which disease states.
+          </p>
+
+          <p>
+            This is an enticing belief to adopt because its implication is almost absurdly
+            exciting: we should be generating many more cures <em>right now</em>.
+          </p>
+
+          <p>This is a notion to take seriously, but it&rsquo;s likely insufficient.</p>
+
+          <p>
+            LLMs are great at generating an abundance of plausible hypotheses with extreme
+            efficiency. In settings where the relevant facts are known with certainty,
+            and/or the correctness of outputs can be automatically and cheaply verified (as
+            in mathematics or programming), this can be enough.
+          </p>
+
+          <p>
+            The primary problem in biology with a purist-reasoning approach is the absence of
+            a tight causal testing loop. Coding agents have become so good because they can
+            be trained with self-play: write code &rarr; run it &rarr; observe the
+            consequences &rarr; immediately ascertain success or failure. Even if humans are
+            needed in-the-loop for evaluation, it is easy to identify what the system needs
+            more examples of, collect them, and improve. There is no killer distributional
+            gap between training and test-time activity: the task used for system evaluation
+            is the task the system is expected to perform when deployed.
+          </p>
+
+          <p>
+            Biology does not have an equivalent loop. A hypothesis can be plausible,
+            mechanistically elegant, and well-supported by fragments of the literature, while
+            still failing when tested in the relevant multicellular disease state.
+          </p>
+
+          <p>
+            There is a second, related problem: the literature is not a neutral sample of
+            biological possibility. It is cursed by the streetlight problem: it
+            overrepresents targets, pathways, model systems, and combinations that have borne
+            historical fruit, and underrepresents the regions of perturbational space that no
+            one had a reason, tool, or incentive to explore.
+          </p>
+
+          <p>
+            There is still a meaningful slice of progress a purist-reasoning approach could
+            make, including areas where inter-field insights have failed to cross-pollinate,
+            or where a closed system has been characterized in disparate papers but never
+            synthesized for translation. But this route ultimately depends on the assumption
+            that the missing transition model is already implicit in available knowledge. If
+            the problem is instead missing causal data then reasoning alone will not be
+            enough. We need either actual clinical data, or better proxies of the relevant
+            biological system.
+          </p>
+
+          <h3 data-toc="2/ Run (many) clinical trials">Approach #2. Run (many) more clinical trials: there&rsquo;s no substitute for the real thing</h3>
+
+          <p>
+            If the limitation of pure reasoning is missing causal data, the most obvious
+            response is to generate that data in humans.
+          </p>
+
+          <p>
+            Clinical trials are the highest-fidelity perturbation experiments we have. Start
+            with a real disease state, administer an intervention, and observe what happens.
+            For drug development, there is ultimately no substitute for this. A therapy must
+            work in actual patients, not in a model of patients. But as a learning loop,
+            clinical development has severe structural limitations.
+          </p>
+
+          <p>
+            Most clinical data, especially for new biological hypotheses, is generated by
+            for-profit institutions with no incentive to share the results of failed trials.
+            Even for successful trials, data sharing is often limited to topline results
+            sufficient to obtain regulatory approval. Data on the profile of non-responders,
+            arguably the most valuable data for the next wave of discovery, is often not
+            collected deeply enough or remains a closely guarded secret.
+          </p>
+
+          <p>
+            Even if all that data were available, the cost of drug development makes it
+            prohibitive to run enough experiments. Clinical trials sit on the Pareto frontier
+            of cost vs value-per-datapoint, but very far out on one side of the graph:
+            incredibly valuable, incredibly expensive. So the amount of clinical perturbation
+            data any one organization can generate is effectively bounded by its capital base.
+          </p>
+
+          <p>
+            There is also a fundamental speed limit. Even with unlimited capital and an
+            abundance of hypotheses, the time to learn whether an intervention worked is
+            bound by the time it takes for the intervention and disease response to play out
+            in a human subject. This is poorly matched to the rapid data generation cycle
+            needed for closed-loop AI improvement.
+          </p>
+
+          <p>
+            Clinical trials are also not compatible with counterfactuals. You observe what
+            happened under the chosen intervention, but you do not get to observe what would
+            have happened to the same patient under a different intervention, different
+            sequence, different dose, or no intervention at all.
+          </p>
+
+          <p>
+            So clinical trials are the highest-fidelity experiments, but they are too sparse,
+            slow, expensive, and non-counterfactual to be the main training loop. They are
+            the final arbiter of whether a model is useful but cannot be the only way the
+            model learns.
+          </p>
+
+          <h3 data-toc="3/ Collect scaled causal data">Approach #3. Collect scaled causal data that reflects disease complexity</h3>
+
+          <p>
+            The real thing clinical trials provide, and pure reasoning lacks, is causal
+            evidence. Do a thing &rarr; observe what happens as a direct consequence of the
+            thing you did. This is what allows efficient learning.
+          </p>
+
+          <p>
+            So, let&rsquo;s relax the constraint that our causal experiments be conducted in
+            humans and try to preserve as many of the critical features as possible.
+          </p>
+
+          <p>
+            The experimental proxy should match the structure of the disease. For
+            multicellular immune-mediated diseases, that means experimental systems that
+            preserve interactions among the relevant cell types, not isolated monocultures
+            optimized for throughput. It means perturbing combinations of levers, not only
+            single targets. It means measuring trajectories over time, not only endpoint
+            viability or a single secreted cytokine.
+          </p>
+
+          <p>
+            Concretely, this means building disease-relevant systems ex vivo and at scale:
+            patient-derived, multicellular experimental models that preserve enough of the
+            interactions that generate the emergent disease phenotype. If the system is cheap
+            and parallelizable enough to perturb thousands of times over, it becomes possible
+            to apply many combinations of interventions; measure the resulting state over
+            time; and feed those trajectories back into a model that picks the next maximally
+            informative perturbation to test experimentally.
+          </p>
+
+          <figure class="diagram wide">
+            <img
+              src="loop-diagram.png"
+              alt="A closed loop between an ex vivo experimental system and an in silico predictive model. On the left, the experimental system (patient-derived, multicellular): (1) perturb the system with a combination applied to state s, then (2) measure the state trajectory over time. That trajectory feeds the predictive model on the right: (3) update the model by fitting the transition (state, perturbation) to next state, and (4) propose the next, most informative perturbation, which is sent back to the experimental system. The trained model is then used to design interventions that steer a diseased state toward a healthy one, and to identify responders via state features that serve as clinical biomarkers."
+            />
+            <figcaption>
+              A closed loop for learning how diseased systems move: perturb a
+              patient-derived, multicellular <em>ex vivo</em> system with combinations of
+              interventions, measure the resulting state trajectories, fit a transition model
+              (state, perturbation)&nbsp;&rarr;&nbsp;state&prime;, and use it to propose the
+              next most-informative experiment &mdash; and ultimately to design interventions
+              and identify responders.
+            </figcaption>
+          </figure>
+
+          <p>
+            This is the kind of data that can turn a biological specification problem into a
+            systems identification problem. The unit of learning is not &ldquo;drug X
+            produced endpoint Y.&rdquo; It is a transition: starting state, intervention,
+            future trajectory. Repeated across contexts, timings, doses, and combinations,
+            these transitions become the empirical substrate for learning how to move
+            diseased systems.
+          </p>
+
+          <p>
+            The obvious value of such a predictive model is that it can be used to design
+            interventions to shift a diseased state to a healthy one. To maximize its
+            clinical utility, the model should also identify the right patients for a given
+            intervention: which features of the starting biological state predict response,
+            and which of those features can be captured with clinically measurable
+            biomarkers?
+          </p>
+
+          <p>
+            The point is not that an ex vivo system is the same as a human, or that it can
+            fully predict clinical response. It does not need to answer the same questions as
+            a clinical trial: did the tumor shrink, did the patient improve, did the endpoint
+            move?
+          </p>
+
+          <p>
+            The more achievable question is upstream of that: when this complex biological
+            system is perturbed, what happens inside the system? Does the intended pathway
+            move? What compensatory programs turn on? Which cell types change state? These are
+            not endpoint-response questions, but state-transition questions, and it is this
+            data that is critical to train the model that solves the specification problem.
+          </p>
+
+          <hr />
+
+          <p>
+            This is the version of AI for drug discovery that I am excited about: a path to
+            better biological specification for complex multicellular disease states.
+          </p>
+
+          <p>
+            The scarce resource is causal data about how complex disease states move when
+            perturbed. AI is the machinery for turning that data into a state-transition
+            model, and for using that model to predict useful interventions.
+          </p>
+
+          <p>We will be able to make drugs that can do the thing.</p>
+
+          <p>The question is whether the thing is right.</p>
+
+          <section class="footnotes">
+            <h2>Notes</h2>
+            <ol>
+              <li id="fn-1">
+                This isn&rsquo;t to say we have perfect predictive power for molecular
+                engineering, especially de novo computational candidates &mdash; sometimes
+                drug candidates that we hypothesize to do the thing fail to do so &mdash; but
+                we overwhelmingly catch such failures preclinically. Toxicity can also be an
+                unpredictable showstopper, but clinical development is designed to catch such
+                cases early.
+                <a href="https://www.nature.com/articles/nrd.2016.184">Only ~14% of Phase III failures are due to safety.</a>
+                <a class="fn-back" href="#fnref-1" aria-label="Back to text">&#8617;</a>
+              </li>
+              <li id="fn-2">
+                Single-target interventions may not be exhausted; see e.g. the relatively
+                recent success of GLP-1. But even there, the overwhelming trend is towards
+                multiple-axis pharmacology integrating multiple metabolic signals.
+                Single-target translation is not a reliable default for complex multicellular
+                disease states.
+                <a class="fn-back" href="#fnref-2" aria-label="Back to text">&#8617;</a>
+              </li>
+            </ol>
+          </section>
+        </div>
+      </article>
+
+      <footer class="site-footer">
+        <a href="../../">&larr; Back to all posts</a>
+      </footer>
+    </div>
+
+    <script src="../../toc.js" defer></script>
+  </body>
+</html>
