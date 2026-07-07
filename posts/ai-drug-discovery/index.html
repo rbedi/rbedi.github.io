@@ -94,7 +94,8 @@
             This is the next great frontier for AI in biology: not merely accelerating the
             construction of drugs, but learning what biology we should be trying to
             change. AI will be transformative for this challenge, but only if it can learn
-            from causal experiments in models that preserve the disease biology we need to
+            in a data-rich regime from causal experiments in models that preserve the disease
+            biology we need to
             understand. To see why, we have to start with the central problem: why is
             specifying the right biological objective so hard?
           </p>
@@ -155,12 +156,8 @@
           <p>
             Cancer is tumor cells embedded in a specific tissue context, surrounded by
             immune cells, stromal cells, cytokines, metabolites, extracellular matrix, and
-            vasculature.
-          </p>
-
-          <p>
-            Similarly, autoimmune diseases are dysregulated immune states that involve
-            multiple cell types, compensatory pathways, the microbiome, and time.
+            vasculature. Similarly, autoimmune diseases are dysregulated immune states that
+            involve multiple cell types, compensatory pathways, the microbiome, and time.
           </p>
 
           <p>
@@ -181,7 +178,7 @@
 
           <p>
             Combination therapies are old news. Backbone chemo regimens are often
-            combinations of multiple agents. Basically the whole field of immuno-oncology
+            combinations of multiple agents. Much of immuno-oncology
             since 2014 has been engaged in an exercise of &ldquo;combine anti-PD1 with
             what?&rdquo; And the impending patent cliffs of highly profitable I&amp;I drugs
             have set off a quest to identify bispecifics to replace them.
@@ -237,7 +234,7 @@
           </p>
 
           <p>
-            Disease categories are typically defined by a combination of anatomy and
+            Many disease categories are defined by a combination of anatomy and
             symptoms, while interventions act on biological states. This mismatch matters
             because a category like &ldquo;lung cancer,&rdquo; &ldquo;colorectal
             cancer,&rdquo; &ldquo;rheumatoid arthritis,&rdquo; or &ldquo;IBD&rdquo; may
@@ -279,7 +276,8 @@
             BRAF, dMMR/MSI-H all show that specific tumor cell features can be more
             informative than tumor type for treatment selection. Consider gefitinib, which
             was initially developed for advanced non-small cell lung cancer (NSCLC) broadly,
-            but failed to show convincing benefit. When later trials were limited to
+            but failed to show convincing benefit in postmarketing studies. When later trials
+            were limited to
             patients who had specific EGFR mutations (exon 19 deletions or L858R), it was a
             striking success. In retrospect, the original trials had not cleanly tested
             whether EGFR inhibition worked; they had tested whether EGFR inhibition worked
@@ -287,7 +285,18 @@
             patients had gefitinib-sensitive EGFR biology.
           </p>
 
-          <p>The next step is applying analogous logic to multicellular disease states.</p>
+          <p>
+            The next step is applying analogous logic to
+            <em>multicellular disease states</em>. We know that such distinct states exist
+            (e.g.,
+            <a href="https://www.nature.com/articles/nm.3967">CMS subtypes of colorectal cancer</a>)
+            and that they can associate with differential treatment response (e.g., in
+            <a href="https://www.nature.com/articles/s41591-022-01789-0">RA</a> or
+            <a href="https://www.nature.com/articles/s41591-026-04502-7">across cancer types</a>).
+            The challenge is in designing interventions that are paired to the right states
+            and identifying clinically testable biomarkers that can identify patients in those
+            states.
+          </p>
 
           <hr />
 
@@ -363,11 +372,10 @@
           </p>
 
           <p>
-            This is an enticing belief to adopt because its implication is almost absurdly
-            exciting: we should be generating many more cures <em>right now</em>.
+            This is an enticing belief to adopt because it implies that we should be
+            generating many more cures <em>right now</em>. This is a notion to take
+            seriously, but it&rsquo;s likely insufficient.
           </p>
-
-          <p>This is a notion to take seriously, but it&rsquo;s likely insufficient.</p>
 
           <p>
             LLMs are great at generating an abundance of plausible hypotheses with extreme
@@ -384,13 +392,11 @@
             needed in-the-loop for evaluation, it is easy to identify what the system needs
             more examples of, collect them, and improve. There is no killer distributional
             gap between training and test-time activity: the task used for system evaluation
-            is the task the system is expected to perform when deployed.
-          </p>
-
-          <p>
-            Biology does not have an equivalent loop. A hypothesis can be plausible,
-            mechanistically elegant, and well-supported by fragments of the literature, while
-            still failing when tested in the relevant multicellular disease state.
+            is the task the system is expected to perform when deployed. The purist-reasoning
+            approach in biology does not have an equivalent loop. It can generate hypotheses
+            that are plausible, mechanistically elegant, and well-supported by fragments of
+            the literature, while still failing when tested in the relevant multicellular
+            disease state.
           </p>
 
           <p>
@@ -403,13 +409,10 @@
 
           <p>
             There is still a meaningful slice of progress a purist-reasoning approach could
-            make, including areas where inter-field insights have failed to cross-pollinate,
-            or where a closed system has been characterized in disparate papers but never
-            synthesized for translation. But this route ultimately depends on the assumption
-            that the missing transition model is already implicit in available knowledge. If
-            the problem is instead missing causal data then reasoning alone will not be
-            enough. We need either actual clinical data, or better proxies of the relevant
-            biological system.
+            make, like areas where inter-field insights have failed to cross-pollinate. But
+            this route ultimately depends on the assumption that the missing transition model
+            is already implicit in available knowledge. If the problem is instead missing
+            causal data, then reasoning alone will not be enough.
           </p>
 
           <h3 data-toc="2/ Run (many) clinical trials">Approach #2. Run (many) more clinical trials: there&rsquo;s no substitute for the real thing</h3>
@@ -440,8 +443,7 @@
             Even if all that data were available, the cost of drug development makes it
             prohibitive to run enough experiments. Clinical trials sit on the Pareto frontier
             of cost vs value-per-datapoint, but very far out on one side of the graph:
-            incredibly valuable, incredibly expensive. So the amount of clinical perturbation
-            data any one organization can generate is effectively bounded by its capital base.
+            incredibly valuable, incredibly expensive.
           </p>
 
           <p>
@@ -471,25 +473,35 @@
           <p>
             The real thing clinical trials provide, and pure reasoning lacks, is causal
             evidence. Do a thing &rarr; observe what happens as a direct consequence of the
-            thing you did. This is what allows efficient learning.
+            thing you did. This is what allows efficient learning. Rather than only trying to
+            extract more signal from the low-data regime of clinical trials, the AI-centric
+            strategy is to generate relevant causal data at scale.
           </p>
 
           <p>
             So, let&rsquo;s relax the constraint that our causal experiments be conducted in
-            humans and try to preserve as many of the critical features as possible.
+            humans and ask what features a useful proxy would need to retain.
           </p>
 
           <p>
             The experimental proxy should match the structure of the disease. For
-            multicellular immune-mediated diseases, that means experimental systems that
-            preserve interactions among the relevant cell types, not isolated monocultures
-            optimized for throughput. It means perturbing combinations of levers, not only
-            single targets. It means measuring trajectories over time, not only endpoint
-            viability or a single secreted cytokine.
+            multicellular immune-mediated diseases, that cannot be a simple single cell type
+            monoculture optimized for throughput. It needs to support the things that make the
+            disease hard in the first place: interactions among multiple cell types,
+            combinations of perturbations, and trajectories over time.
           </p>
 
           <p>
-            Concretely, this means building disease-relevant systems ex vivo and at scale:
+            &ldquo;<a href="https://arxiv.org/pdf/2409.11654">Virtual cell</a>&rdquo;
+            approaches are valuable when the relevant question is how a particular cell type
+            responds internally to perturbation. But many complex diseases, especially those
+            involving the immune system, are diseases of intercellular interaction. In those
+            settings, single-cell depth is not a substitute for modeling the multicellular
+            structure of the system.<sup class="fn"><a id="fnref-3" href="#fn-3">3</a></sup>
+          </p>
+
+          <p>
+            Concretely, this means we need to build disease-relevant systems ex vivo and at scale:
             patient-derived, multicellular experimental models that preserve enough of the
             interactions that generate the emergent disease phenotype. If the system is cheap
             and parallelizable enough to perturb thousands of times over, it becomes possible
@@ -504,12 +516,7 @@
               alt="A closed loop between scalable, patient-derived, multicellular, ex vivo experimental data collection and an in silico AI model. Left: (1) perturb the system, then (2) measure state over time. Right: (3) update the model &mdash; a transition model (state, perturbation) &rarr; state&prime; &mdash; and (4) propose the next perturbation, sent back to the experiment. The trained model is then used to design interventions that steer a diseased state toward a healthy one, and to identify responders whose predictive features become clinical biomarkers."
             />
             <figcaption>
-              A closed loop for learning how diseased systems move: perturb a
-              patient-derived, multicellular <em>ex vivo</em> system with combinations of
-              interventions, measure the resulting state trajectories, fit a transition model
-              (state, perturbation)&nbsp;&rarr;&nbsp;state&prime;, and use it to propose the
-              next most-informative experiment &mdash; and ultimately to design interventions
-              and identify responders.
+              The missing data flywheel for drug discovery: a closed loop between a scalable, causal ex vivo experimental data collection and an in silico AI model.
             </figcaption>
           </figure>
 
@@ -539,8 +546,8 @@
           </p>
 
           <p>
-            The more achievable question is upstream of that: when this complex biological
-            system is perturbed, what happens inside the system? Does the intended pathway
+            Its job is upstream: when this complex biological system is perturbed, what
+            happens inside the system? Does the intended pathway
             move? What compensatory programs turn on? Which cell types change state? These are
             not endpoint-response questions, but state-transition questions, and it is this
             data that is critical to train the model that solves the specification problem.
@@ -578,11 +585,21 @@
               </li>
               <li id="fn-2">
                 Single-target interventions may not be exhausted; see e.g. the relatively
-                recent success of GLP-1. But even there, the overwhelming trend is towards
+                recent success of GLP-1. Even there, the overwhelming trend is towards
                 multiple-axis pharmacology integrating multiple metabolic signals.
                 Single-target translation is not a reliable default for complex multicellular
                 disease states.
                 <a class="fn-back" href="#fnref-2" aria-label="Back to text">&#8617;</a>
+              </li>
+              <li id="fn-3">
+                A bottom-up virtual cell approach is possible in principle: build virtual
+                tumor cells, fibroblasts, T cells, macrophages, and dendritic cells; then
+                simulate their interactions. But if the key biology lies in how these cell
+                types affect each other, the more data-efficient strategy may be to measure
+                those interactions directly in a multicellular experimental system, rather
+                than inferring them by separately modeling each and reconstructing the rules
+                of their interaction.
+                <a class="fn-back" href="#fnref-3" aria-label="Back to text">&#8617;</a>
               </li>
             </ol>
           </section>
