@@ -218,7 +218,7 @@ a:hover {
   padding-bottom: 5rem;
 }
 .prose p {
-  margin: 1.35rem 0;
+  margin: 1.1rem 0;
 }
 .prose h2 {
   font-size: 1.5rem;
@@ -243,7 +243,7 @@ a:hover {
 
 .prose ul,
 .prose ol {
-  margin: 1.35rem 0;
+  margin: 1.1rem 0;
   padding-left: 1.4rem;
 }
 .prose li {
@@ -468,8 +468,8 @@ sup.fn {
     position: fixed;
     top: 7rem;
     width: 12rem;
-    /* sit just left of the centered column (half of --measure = 23rem) */
-    left: calc(50% - 23rem - 2rem - 12rem);
+    /* sit just left of the centered column, 2rem clear of its left edge */
+    left: calc(50% - var(--measure) / 2 - 2rem - 12rem);
     max-height: calc(100vh - 9rem);
     overflow-y: auto;
     font-family: var(--font-sans);
@@ -561,7 +561,7 @@ sup.fn {
    Narrow windows (tablet / mobile) keep the tighter measure above. */
 @media (min-width: 1024px) {
   :root {
-    --measure: 46rem;
+    --measure: 48rem;
   }
   body {
     font-size: 1.0625rem; /* ~17px */
