@@ -56,8 +56,8 @@ body {
   background: var(--bg);
   color: var(--text);
   font-family: var(--font-serif);
-  font-size: 1.1875rem; /* ~19px */
-  line-height: 1.65;
+  font-size: 1.125rem; /* ~18px */
+  line-height: 1.6;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -529,8 +529,8 @@ sup.fn {
 /* ---------- Responsive ---------- */
 @media (max-width: 640px) {
   body {
-    font-size: 1.0625rem;
-    line-height: 1.6;
+    font-size: 1rem;
+    line-height: 1.55;
   }
   .wrap {
     padding: 0 1.25rem;
@@ -564,7 +564,7 @@ sup.fn {
     --measure: 46rem;
   }
   body {
-    font-size: 1.125rem; /* ~18px */
+    font-size: 1.0625rem; /* ~17px */
   }
   .post-title-main {
     font-size: 2.35rem;
