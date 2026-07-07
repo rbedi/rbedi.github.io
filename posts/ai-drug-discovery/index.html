@@ -122,6 +122,19 @@
             <li>therefore, modulating <em>t</em> will rescue the phenotype of <em>c</em>, and ameliorate the effects of <em>d</em></li>
           </ul>
 
+          <figure class="diagram wide">
+            <img
+              src="target-reduction.png"
+              alt="A large triangle labeled &lsquo;sophisticated models of complex disease&rsquo; narrows through a &lsquo;reduced to&rsquo; arrow into a single target t. From t, a syllogism branches downward: modulate t (up or down) &rarr; fix cell type c &rarr; treat disease d. To the right runs the development pipeline: target t &rarr; hit &rarr; lead &rarr; clinical candidate &rarr; Phase I &rarr; Phase II &rarr; Phase III &rarr; approval, marked &lsquo;very fast!&rsquo;. Callouts ask &lsquo;can it do X?&rsquo; and &lsquo;is it safe?&rsquo; early in the pipeline, while &lsquo;was X right?&rsquo; sits at the far clinical end, linked back to the start by a dashed &lsquo;very slow feedback loop&rsquo; arrow."
+            />
+            <figcaption>
+              The compression problem. A high-dimensional model of a complex disease gets
+              reduced to a single target <em>t</em> &mdash; and the pipeline from target to
+              approval answers &ldquo;can it do X?&rdquo; quickly, while whether X was the
+              right thing to change comes back only through a very slow clinical feedback loop.
+            </figcaption>
+          </figure>
+
           <p>
             This framing has been handsomely, albeit infrequently, rewarded. The allure of
             discovering the next Keytruda (anti-PD1 monospecific) or Dupixent (anti-IL4R
@@ -279,8 +292,9 @@
           <hr />
 
           <p>
-            These reasons help explain why drug development seems like it is getting harder
-            over time. Many of the clearest single-axis opportunities in diseases with
+            These reasons help explain why drug development seems like it is
+            <a href="https://www.nature.com/articles/nrd3681">getting harder over time</a>.
+            Many of the clearest single-axis opportunities in diseases with
             relatively simple causal structure have already been found. What remains is
             increasingly enriched for diseases where the relevant biology is multicellular,
             context-dependent, nonlinear, or poorly captured by existing disease categories.
@@ -326,7 +340,7 @@
             toward a desired future state.
           </p>
 
-          <p>How can such a mapping be learned?</p>
+          <h2 data-toc="How AI can learn it">How can AI learn this?</h2>
 
           <h3 data-toc="1/ It&rsquo;s all in the literature">Approach #1. LLMs reign supreme: the necessary data is latent in the literature.</h3>
 
