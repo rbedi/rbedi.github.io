@@ -49,6 +49,23 @@ column width. Optional classes on the `<figure>`:
 Combine with `diagram` as needed, e.g. `class="diagram wide"` or
 `class="diagram narrow"`. See `posts/ai-drug-discovery/` for real examples.
 
+**Social previews (Twitter/X, etc.).** Each post's `<head>` sets
+`twitter:card = summary_large_image` plus `og:image` so links unfurl as a large
+image card. The image must be a **1200×630** file referenced by an **absolute**
+URL (`https://rishibedi.com/posts/<slug>/og-image.png`) — relative paths are
+ignored by scrapers. Generate one from a post's first figure with:
+
+```bash
+python3 -c "from PIL import Image; s=Image.open('posts/<slug>/<figure>.png').convert('RGBA'); \
+W,H=1200,630; bg=Image.new('RGB',(W,H),(255,255,255)); cw=W-120; \
+r=s.resize((cw,round(s.height*cw/s.width))); bg.paste(r,((W-cw)//2,(H-r.height)//2),r); \
+bg.save('posts/<slug>/og-image.png',optimize=True)"
+```
+
+Platforms cache unfurls aggressively, so after publishing you may need to
+re-scrape (e.g. paste the URL into <https://cards-dev.twitter.com/validator> or
+append a throwaway `?v=2` to the link) before the new card shows.
+
 **Table of contents.** Each post includes `toc.js`, which auto-builds a
 navigator from the post's `<h2>`/`<h3>` headings. It floats in the left margin
 and highlights the section you're reading, but only on wide screens (≥1280px);
