@@ -364,6 +364,13 @@ a:hover {
   }
 }
 
+/* Constrain a figure to ~60% of the max reading width, centered. Opt-in.
+   Caps at an absolute width, so it still fills the column on narrow screens. */
+.prose figure.narrow {
+  max-width: 29rem; /* ~0.6 x the 48rem desktop measure */
+  margin-inline: auto;
+}
+
 /* Tables */
 .prose table {
   width: 100%;

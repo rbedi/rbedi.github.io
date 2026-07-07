@@ -36,15 +36,18 @@ Footnotes written inline in prose (e.g. `(* Footnote: …)`) are converted to
 proper numbered endnotes.
 
 **Figures.** A plain `<figure><img><figcaption></figure>` renders inline at the
-column width. Two optional classes on the `<figure>`:
+column width. Optional classes on the `<figure>`:
 
 - `class="diagram"` — puts the image on a light card (keeps diagrams with dark
   ink legible even in dark mode; use it for anything with a transparent
   background).
 - `class="wide"` — lets the figure break out wider than the text column, for
-  detailed diagrams. Combine them: `class="diagram wide"`.
+  detailed diagrams.
+- `class="narrow"` — caps the figure at ~60% of the max text width, centered,
+  for small charts that would look oversized full-width.
 
-See `posts/ai-drug-discovery/` for a real example of both.
+Combine with `diagram` as needed, e.g. `class="diagram wide"` or
+`class="diagram narrow"`. See `posts/ai-drug-discovery/` for real examples.
 
 **Table of contents.** Each post includes `toc.js`, which auto-builds a
 navigator from the post's `<h2>`/`<h3>` headings. It floats in the left margin
