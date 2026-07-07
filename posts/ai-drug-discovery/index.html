@@ -125,13 +125,13 @@
           <figure class="diagram wide">
             <img
               src="target-reduction.png"
-              alt="A large triangle labeled &lsquo;sophisticated models of complex disease&rsquo; narrows through a &lsquo;reduced to&rsquo; arrow into a single target t. From t, a syllogism branches downward: modulate t (up or down) &rarr; fix cell type c &rarr; treat disease d. To the right runs the development pipeline: target t &rarr; hit &rarr; lead &rarr; clinical candidate &rarr; Phase I &rarr; Phase II &rarr; Phase III &rarr; approval, marked &lsquo;very fast!&rsquo;. Callouts ask &lsquo;can it do X?&rsquo; and &lsquo;is it safe?&rsquo; early in the pipeline, while &lsquo;was X right?&rsquo; sits at the far clinical end, linked back to the start by a dashed &lsquo;very slow feedback loop&rsquo; arrow."
+              alt="On the left, a tumor microenvironment viewed through a magnifying glass, with four panels &mdash; feedback dynamics (a network graph), cell&ndash;cell interactions (a chord diagram), multi-omics (data tracks), and spatial context (a hexagonal tissue map) &mdash; together labeled &lsquo;high-dimensional description of complex disease&rsquo;. A large triangle and a &lsquo;reduced to&rsquo; arrow narrow all of it down to a single on/off target t."
             />
             <figcaption>
-              The compression problem. A high-dimensional model of a complex disease gets
-              reduced to a single target <em>t</em> &mdash; and the pipeline from target to
-              approval answers &ldquo;can it do X?&rdquo; quickly, while whether X was the
-              right thing to change comes back only through a very slow clinical feedback loop.
+              The compression problem. A rich, high-dimensional description of a complex
+              disease &mdash; the tumor microenvironment, its feedback dynamics, cell&ndash;cell
+              interactions, multi-omics, and spatial context &mdash; collapses to a single
+              on/off target <em>t</em>.
             </figcaption>
           </figure>
 
@@ -501,7 +501,7 @@
           <figure class="diagram wide">
             <img
               src="loop-diagram.png"
-              alt="A closed loop between an ex vivo experimental system and an in silico predictive model. On the left, the experimental system (patient-derived, multicellular): (1) perturb the system with a combination applied to state s, then (2) measure the state trajectory over time. That trajectory feeds the predictive model on the right: (3) update the model by fitting the transition (state, perturbation) to next state, and (4) propose the next, most informative perturbation, which is sent back to the experimental system. The trained model is then used to design interventions that steer a diseased state toward a healthy one, and to identify responders via state features that serve as clinical biomarkers."
+              alt="A closed loop between scalable, patient-derived, multicellular, ex vivo experimental data collection and an in silico AI model. Left: (1) perturb the system, then (2) measure state over time. Right: (3) update the model &mdash; a transition model (state, perturbation) &rarr; state&prime; &mdash; and (4) propose the next perturbation, sent back to the experiment. The trained model is then used to design interventions that steer a diseased state toward a healthy one, and to identify responders whose predictive features become clinical biomarkers."
             />
             <figcaption>
               A closed loop for learning how diseased systems move: perturb a

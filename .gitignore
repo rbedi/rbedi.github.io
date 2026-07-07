@@ -6,3 +6,9 @@
 
 # Editor scratch
 *.swp
+
+# Raw source drafts — kept local, not published (may contain comments / tracked changes)
+RAW_posts/
+
+# Word lock/temp files
+~$*
